@@ -1,0 +1,12 @@
+id,name,kind,latitude,longitude,source
+kent,Kent Railway Station,Train station,51.90167,-8.45879,https://mapcarta.com/W104051132
+parnell,Parnell Place Bus Station,Bus station,51.89953,-8.46651,https://mapcarta.com/W552059838
+merchants,Merchant’s Quay bus stop,Bus stop,51.90021,-8.46943,https://mapcarta.com/N5328218024
+merchants_mall,Merchant’s Quay Shopping Centre,Shopping centre,51.89974,-8.4689,https://mapcarta.com/W1376115648
+airport,Cork Airport terminal,Airport,51.84907,-8.48998,https://mapcarta.com/W93153202
+english,English Market,Historic market,51.89773,-8.47429,https://mapcarta.com/35990986
+cathedral,Saint Fin Barre’s Cathedral,Monument,51.89436,-8.4805,https://mapcarta.com/36018292
+nano,Nano Nagle Place,Heritage attraction,51.8935,-8.47274,https://mapcarta.com/W687235668
+gaol,Cork City Gaol,Museum / historic landmark,51.89948,-8.499,https://mapcarta.com/35990990
+elizabeth,Elizabeth Fort,Historic fort,51.89454,-8.47802,https://mapcarta.com/W54598301
+fitzgerald,Fitzgerald Park,Park / landmark,51.89591,-8.49586,https://mapcarta.com/W31310116
