@@ -74,7 +74,7 @@ aside{display:flex;flex-direction:column;min-height:0;min-width:0;border-right:1
 .legend{position:absolute;bottom:20px;right:20px;background:rgba(255,253,247,.96);backdrop-filter:blur(15px);border:1px solid #e9e1d2;padding:14px 16px;border-radius:15px;font-size:11px;font-weight:800;color:#244b42;box-shadow:0 10px 30px #183d3920;z-index:2}
 .legend>div{display:flex;align-items:center;gap:7px;margin:4px 0}
 .legend>div:last-child{display:block!important;font-size:10px;font-weight:500;line-height:1.55;max-width:192px}
-.dot{display:inline-block;width:15px;height:15px;border-radius:4px;border:2px solid #fff;box-shadow:0 0 0 1px #ded9ca;margin-right:2px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:2px;border:2px solid #fff;box-shadow:0 0 0 1px #ded9ca;margin-right:2px}
 .error{position:absolute;inset:25% 15%;background:#fffdfa;border-radius:14px;padding:24px;display:none;z-index:7}
 .notice{font-size:10px;color:#6a8278}
 .maplibregl-ctrl-group{border-radius:12px!important;overflow:hidden;box-shadow:0 7px 22px #173c3926!important}
@@ -125,20 +125,20 @@ function toneCorkMap(){
   }
 }
 function addSquarePin(name,fill,label,active=false){
-  const c=document.createElement('canvas');c.width=72;c.height=72;
-  const x=c.getContext('2d');const size=active?57:52;
-  const left=(72-size)/2,top=(72-size)/2-1,r=active?12:10;
-  x.shadowColor='rgba(17,49,44,.30)';x.shadowBlur=11;x.shadowOffsetY=4;
+  // Compact, vivid map markers: 12px squares (15px when selected).
+  // Transparent canvas padding provides a slightly larger pointer hit area.
+  const c=document.createElement('canvas');c.width=40;c.height=40;
+  const x=c.getContext('2d'),size=active?30:24;
+  const left=(40-size)/2,top=(40-size)/2,r=3;
+  x.shadowColor='rgba(22,52,48,.28)';x.shadowBlur=4;x.shadowOffsetY=2;
   x.beginPath();x.moveTo(left+r,top);x.lineTo(left+size-r,top);
   x.quadraticCurveTo(left+size,top,left+size,top+r);
   x.lineTo(left+size,top+size-r);x.quadraticCurveTo(left+size,top+size,left+size-r,top+size);
   x.lineTo(left+r,top+size);x.quadraticCurveTo(left,top+size,left,top+size-r);
   x.lineTo(left,top+r);x.quadraticCurveTo(left,top,left+r,top);x.closePath();
   x.fillStyle=fill;x.fill();x.shadowColor='transparent';
-  x.strokeStyle=active?'#f9cb70':'#fffdf6';x.lineWidth=active?6:4;x.stroke();
-  x.fillStyle='#fffdf8';x.font='800 28px "DM Sans", system-ui, sans-serif';
-  x.textAlign='center';x.textBaseline='middle';x.fillText(label,36,top+size/2+1);
-  map.addImage(name,x.getImageData(0,0,72,72),{pixelRatio:2});
+  x.lineWidth=active?4:3;x.strokeStyle=active?'#f9ca6c':'#fffdf6';x.stroke();
+  map.addImage(name,x.getImageData(0,0,40,40),{pixelRatio:2});
 }
 
 try{map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[-8.475,51.898],zoom:12.5,pitch:26,bearing:-9,antialias:true});map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'bottom-right');map.on('load',()=>{toneCorkMap();let style=map.getStyle(),layer=style.layers.find(l=>l.type==='symbol'&&l.layout&&l.layout['text-field']);let before=layer?.id;let sourceName=Object.keys(style.sources).find(k=>style.sources[k].type==='vector');if(sourceName){try{map.addLayer({id:'cork-3d-buildings',type:'fill-extrusion',source:sourceName,'source-layer':'building',minzoom:12.7,paint:{'fill-extrusion-color':'#d9bca4','fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],12],'fill-extrusion-base':['coalesce',['get','render_min_height'],['get','min_height'],0],'fill-extrusion-opacity':0.55}},before)}catch(e){console.warn('Building extrusions unavailable:',e)}}
@@ -151,7 +151,7 @@ map.addLayer({
  id:'points',type:'symbol',source:'venues',
  layout:{
   'icon-image':['match',['get','category'],'Cafe','cork-cafe','cork-restaurant'],
-  'icon-size':['interpolate',['linear'],['zoom'],10,.71,12,.83,14,1.02,16,1.20],
+  'icon-size':['interpolate',['linear'],['zoom'],10,.86,12,1,14,1.05,16,1.12],
   'icon-allow-overlap':true,'icon-ignore-placement':true,
   'icon-pitch-alignment':'viewport','icon-rotation-alignment':'viewport'
  },
@@ -162,7 +162,7 @@ map.addLayer({
  filter:['==',['get','id'],'__none__'],
  layout:{
   'icon-image':['match',['get','category'],'Cafe','cork-cafe-active','cork-restaurant-active'],
-  'icon-size':1.27,'icon-allow-overlap':true,'icon-ignore-placement':true,
+  'icon-size':1.1,'icon-allow-overlap':true,'icon-ignore-placement':true,
   'icon-pitch-alignment':'viewport','icon-rotation-alignment':'viewport'
  }
 });
