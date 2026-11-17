@@ -1,21 +1,25 @@
 # Food O'Cork
 
-Cork City restaurant and café atlas: 3D map, venue directory, price research and proximity to transport hubs and landmarks.
+Interactive Cork City food and price atlas with a 3D map, restaurant and café directory, indicative menu prices, and proximity to major landmarks and transport hubs.
 
-## Project status
-Research prototype. Venue coordinates and prices require verification before publication as definitive facts. Walking estimates are not verified pedestrian routes.
+## Website
+
+**GitHub Pages:** https://leon-bishop.github.io/Food-O-Cork/
+
+The complete website is in [index.html](index.html). Its venue and landmark snapshot is embedded in the HTML, so GitHub Pages can serve it without a backend or separate JSON request. Internet access is required for map tiles and MapLibre assets.
+
+## Research files
+
+- [Venue records](data/venues.csv) — 150 initial restaurant and café listings
+- [Landmarks](data/landmarks.csv) — 11 transport hubs and landmarks
+- [Proximity matrix](data/proximity_matrix.csv) — preliminary proximity estimates
+- [Geographic coverage gaps](research/verification/geographic_coverage_gaps.csv)
+- [Venue verification queue](research/verification/venue_verification_queue.csv)
 
 ## Publish with GitHub Pages
-Settings → Pages → Build and deployment → Deploy from a branch → main / (root).
 
-## Source package
-The complete local project archive is available in the associated ChatGPT conversation as `Food-O-Cork_GitHub_Ready.zip`. Upload its contents to the repository root (not the ZIP itself) to publish the existing site.
+Go to **Settings → Pages → Build and deployment → Source: GitHub Actions**. The workflow in `.github/workflows/pages.yml` deploys from `main`.
 
-## Structure
-- `index.html` — map-first website
-- `data.json` — app-ready venue data
-- `data/` — venue, landmark and proximity CSVs and research workbook
-- `research/verification/` — geographic verification audit
+## Data quality
 
-## Data integrity
-Do not label straight-line estimates as walking time. Confirm entrance locations, prices, business status and source dates before treating records as verified.
+**Research prototype, not a verified business directory.** Many venue locations use locality proxy coordinates. The walking-minute estimates are indicative calculations, **not** pedestrian-route results. Venue trading status and current prices must be checked independently before treating them as confirmed.
